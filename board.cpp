@@ -2,7 +2,7 @@
 #include <iostream>
 
 Board::Board() {
-    emplyCells = 9;
+    emptyCellse = 9;
     for (int i = 0; i < 9; i++) {
         board[i / 3][i % 3] = '_';
     }
@@ -45,7 +45,7 @@ bool Board::m_HasWon() const {
 }
 
 bool Board::m_IsEnded() const {
-    return emplyCells == 0;
+    return emptyCellse == 0;
 }
 
 int Board::m_mark(char marker, int i) {
@@ -60,7 +60,7 @@ int Board::m_mark(char marker, int i) {
     }
 
     board[i][j] = marker;
-    emplyCells--;
+    emptyCellse--;
     return 1;
 }
 
@@ -77,5 +77,5 @@ void Board::m_RemoveMark(int i) {
     i /= 3;
 
     board[i][j] = '_';
-    emplyCells++;
+    emptyCellse++;
 }

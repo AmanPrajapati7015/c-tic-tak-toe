@@ -10,7 +10,7 @@ class Player {
    protected:
     const char* m_Name;
     char m_Marker;
-    T* getDrived() { return static_cast<T*>(this); }
+    T* getDerived() { return static_cast<T*>(this); }
     friend T;
 
    public:
@@ -18,7 +18,7 @@ class Player {
     char getMarker() const { return m_Marker; }
     const char* getName() const { return m_Name; };
 
-    void PlayTurn(Board& board) { getDrived()->PlayTurn(board); };
+    void PlayTurn(Board& board) { getDerived()->PlayTurn(board); };
 };
 
 class HumanPlayer : public Player<HumanPlayer> {

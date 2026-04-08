@@ -2,7 +2,7 @@
 
 class Board {
     char board[3][3];
-    int emplyCells;
+    int emptyCellse;
 
    public:
     Board();

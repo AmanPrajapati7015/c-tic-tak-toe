@@ -2,10 +2,9 @@
 #include "board.hpp"
 #include "player.hpp"
 
-extern Board board;
-
 template <typename T>
-int GameRunner(Player<T>* activePlayer) {
+int GameRunner(Board& board, Player<T>* activePlayer) {
+    // Board board;
     board.m_Display();
     activePlayer->PlayTurn(board);
 
