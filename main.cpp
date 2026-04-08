@@ -1,8 +1,26 @@
-extern void GameRunner();
+#include <iostream>
+#include "board.hpp"
+#include "gameRunner.hpp"
+#include "player.hpp"
+
+HumanPlayer player1("Aman", 'X');
+AIPlayer player2("AI", 'O');
+Board board{};
 
 int main(int argc, char const* argv[]) {
-    GameRunner();
-}
+    bool isDraw = true;
+    while (!board.m_IsEnded()) {
+        if (GameRunner(&player1)) {
+            isDraw = 0;
+            break;
+        }
+        if (GameRunner(&player2)) {
+            isDraw = 0;
+            break;
+        }
+    }
 
-// TODO
-// 1. change excetption with return value of .m_mark function in board
+    if (isDraw) {
+        std::cout << "Match Draw" << std::endl;
+    }
+}

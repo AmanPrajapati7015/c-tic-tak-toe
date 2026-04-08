@@ -7,8 +7,8 @@ class Board {
    public:
     Board();
     // Board(const Board& prev);
-    void m_mark(char marker, int i, int j);
-    void m_Display() const noexcept;
+    int m_mark(char marker, int i, int j);
+    void m_Display() const;
     bool m_IsEnded() const;
     bool m_HasWon() const;
     bool m_IsValidIndex(int i) const;

@@ -1,5 +1,4 @@
 #include "board.hpp"
-#include <exception>
 #include <iostream>
 
 Board::Board() {
@@ -9,7 +8,7 @@ Board::Board() {
     }
 }
 
-void Board::m_Display() const noexcept {
+void Board::m_Display() const {
     std::cout << "_______\n";
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < 3; j++) {
@@ -49,14 +48,18 @@ bool Board::m_IsEnded() const {
     return emplyCells == 0;
 }
 
-void Board::m_mark(char marker, int i, int j) {
-    if (i > 3 || j > 3)
-        throw std::runtime_error("out of range index.");
-    else if (board[i][j] != '_')
-        throw std::runtime_error("Please provide an empty cell.");
+int Board::m_mark(char marker, int i, int j) {
+    if (i > 3 || j > 3) {
+        std::cout << "out of range index.\n";
+        return 0;
+    } else if (board[i][j] != '_') {
+        std::cout << "Please provide an empty cell.\n";
+        return 0;
+    }
 
     board[i][j] = marker;
     emplyCells--;
+    return 1;
 }
 
 bool Board::m_IsValidIndex(int i) const {
