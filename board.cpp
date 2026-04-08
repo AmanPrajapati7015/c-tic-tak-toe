@@ -48,8 +48,10 @@ bool Board::m_IsEnded() const {
     return emplyCells == 0;
 }
 
-int Board::m_mark(char marker, int i, int j) {
-    if (i > 3 || j > 3) {
+int Board::m_mark(char marker, int i) {
+    int j = i % 3;
+    i /= 3;
+    if (i >= 3 || j >= 3 || i < 0 || j < 0) {
         std::cout << "out of range index.\n";
         return 0;
     } else if (board[i][j] != '_') {
@@ -63,14 +65,17 @@ int Board::m_mark(char marker, int i, int j) {
 }
 
 bool Board::m_IsValidIndex(int i) const {
-    if (i > 8)
+    if (i > 8 || i < 0)
         return false;
     if (board[i / 3][i % 3] != '_')
         return false;
     return true;
 }
 
-void Board::m_RemoveMark(int i, int j) {
+void Board::m_RemoveMark(int i) {
+    int j = i % 3;
+    i /= 3;
+
     board[i][j] = '_';
     emplyCells++;
 }

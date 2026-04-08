@@ -14,7 +14,7 @@ int main(int argc, char const* argv[]) {
             isDraw = 0;
             break;
         }
-        if (GameRunner(&player2)) {
+        if (!board.m_IsEnded() && GameRunner(&player2)) {
             isDraw = 0;
             break;
         }

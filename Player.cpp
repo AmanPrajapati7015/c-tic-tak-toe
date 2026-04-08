@@ -12,7 +12,7 @@ void HumanPlayer::PlayTurn(Board& board) {
                   << m_Marker << "] :: ";
         std::cin >> i >> j;
 
-        if (board.m_mark(m_Marker, i, j))
+        if (board.m_mark(m_Marker, i * 3 + j))
             break;
         else
             std::cout << "Please try again" << std::endl;
@@ -35,5 +35,5 @@ void AIPlayer::PlayTurn(Board& board) {
         }
     }
 
-    board.m_mark(m_Marker, maxi_ind / 3, maxi_ind % 3);
+    board.m_mark(m_Marker, maxi_ind);
 }

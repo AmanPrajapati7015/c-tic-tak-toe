@@ -8,18 +8,18 @@ extern AIPlayer player2;
 
 template <typename T>
 int MinMax(Board& board, Player<T>* p, int i) {
-    board.m_mark(p->getMarker(), i / 3, i % 3);
+    board.m_mark(p->getMarker(), i);
 
     // base case: evaluated for the player who JUST moved (p)
     if (board.m_HasWon()) {
-        board.m_RemoveMark(i / 3, i % 3);
+        board.m_RemoveMark(i);
         if constexpr (std::is_same_v<AIPlayer, T>)
             return 5;
         return -5;
     }
 
     if (board.m_IsEnded()) {
-        board.m_RemoveMark(i / 3, i % 3);
+        board.m_RemoveMark(i);
         return 0;
     }
 
@@ -49,7 +49,7 @@ int MinMax(Board& board, Player<T>* p, int i) {
         g_bestScore = bestScore;
     }
 
-    board.m_RemoveMark(i / 3, i % 3);
+    board.m_RemoveMark(i);
 
     return g_bestScore;
 }
