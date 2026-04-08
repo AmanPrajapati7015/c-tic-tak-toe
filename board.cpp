@@ -2,7 +2,7 @@
 #include <iostream>
 
 Board::Board() {
-    emptyCellse = 9;
+    emptyCells = 9;
     for (int i = 0; i < 9; i++) {
         board[i / 3][i % 3] = '_';
     }
@@ -40,28 +40,28 @@ bool Board::m_HasWon() const {
 
     if (board[0][2] != '_' && board[0][2] == board[1][1] &&
         board[0][2] == board[2][0])
-        return 1;
-    return 0;
+        return true;
+    return false;
 }
 
 bool Board::m_IsEnded() const {
-    return emptyCellse == 0;
+    return emptyCells == 0;
 }
 
-int Board::m_mark(char marker, int i) {
+bool Board::m_mark(char marker, int i) {
     int j = i % 3;
     i /= 3;
     if (i >= 3 || j >= 3 || i < 0 || j < 0) {
         std::cout << "out of range index.\n";
-        return 0;
+        return false;
     } else if (board[i][j] != '_') {
         std::cout << "Please provide an empty cell.\n";
-        return 0;
+        return false;
     }
 
     board[i][j] = marker;
-    emptyCellse--;
-    return 1;
+    emptyCells--;
+    return true;
 }
 
 bool Board::m_IsValidIndex(int i) const {
@@ -77,5 +77,5 @@ void Board::m_RemoveMark(int i) {
     i /= 3;
 
     board[i][j] = '_';
-    emptyCellse++;
+    emptyCells++;
 }

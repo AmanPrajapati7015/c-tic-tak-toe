@@ -9,6 +9,7 @@ AIPlayer player2("AI", 'O');
 int main(int argc, char const* argv[]) {
     Board board{};
     bool isDraw = true;
+
     while (!board.m_IsEnded()) {
         if (GameRunner(board, &player1)) {
             isDraw = 0;

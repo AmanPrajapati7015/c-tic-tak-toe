@@ -12,7 +12,8 @@ void HumanPlayer::PlayTurn(Board& board) {
                   << m_Marker << "] :: ";
         std::cin >> i >> j;
 
-        if (board.m_mark(m_Marker, i * 3 + j))
+        if (i < 0 || j < 0 || j >= 3 ||
+            i >= 3 board.m_mark(m_Marker, i * 3 + j))
             break;
         else
             std::cout << "Please try again" << std::endl;

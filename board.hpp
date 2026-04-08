@@ -2,12 +2,12 @@
 
 class Board {
     char board[3][3];
-    int emptyCellse;
+    int emptyCells;
 
    public:
     Board();
     // Board(const Board& prev);
-    int m_mark(char marker, int i);
+    bool m_mark(char marker, int i);
     void m_Display() const;
     bool m_IsEnded() const;
     bool m_HasWon() const;
