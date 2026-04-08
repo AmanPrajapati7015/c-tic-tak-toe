@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "board.hpp"
+// #include "minMax.hpp"
 
 template <typename T>
 class Player {
@@ -17,22 +18,31 @@ class Player {
     Player(const char* name, char marker) : m_Name(name), m_Marker(marker) {}
     char getMarker() const { return m_Marker; }
     const char* getName() const { return m_Name; };
-
-    void PlayTurn(Board& board) { getDerived()->PlayTurn(board); };
+    template <typename T1>
+    void PlayTurn(Board& board, Player<T1>* other) {
+        getDerived()->PlayTurn(board, other);
+    };
 };
 
 class HumanPlayer : public Player<HumanPlayer> {
     HumanPlayer() = default;
 
    public:
-    HumanPlayer(const char* name, char marker);
-    void PlayTurn(Board& board);
-};
+    HumanPlayer(const char* name, char marker) : Player(name, marker) {}
 
-class AIPlayer : public Player<AIPlayer> {
-    AIPlayer() = default;
+    template <typename T1>
+    void PlayTurn(Board& board, Player<T1>* other) {
+        int i, j;
+        while (true) {
+            std::cout << "Please give i, j, for Player (" << m_Name << ") ["
+                      << m_Marker << "] :: ";
+            std::cin >> i >> j;
 
-   public:
-    AIPlayer(const char* name, char marker);
-    void PlayTurn(Board& board);
+            if (i < 0 || j < 0 || i >= 3 || j >= 3) {
+                std::cout << "Out of bounds! Please try again.\n";
+            } else if (board.m_mark(m_Marker, i * 3 + j)) {
+                break;
+            }
+        }
+    }
 };
