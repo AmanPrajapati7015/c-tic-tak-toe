@@ -6,7 +6,7 @@ class Board {
 
    public:
     Board();
-    // Board(const Board& prev);
+    Board(const Board& prev) = delete;
     bool m_mark(char marker, int i);
     void m_Display() const;
     bool m_IsEnded() const;

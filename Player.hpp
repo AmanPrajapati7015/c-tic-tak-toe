@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
+// #include <sstream>
 #include "board.hpp"
-// #include "minMax.hpp"
 
 template <typename T>
 class Player {
@@ -24,6 +24,8 @@ class Player {
     };
 };
 
+// extern std::istringstream stringcin;
+
 class HumanPlayer : public Player<HumanPlayer> {
     HumanPlayer() = default;
 
@@ -37,6 +39,7 @@ class HumanPlayer : public Player<HumanPlayer> {
             std::cout << "Please give i, j, for Player (" << m_Name << ") ["
                       << m_Marker << "] :: ";
             std::cin >> i >> j;
+            // stringcin >> i >> j;
 
             if (i < 0 || j < 0 || i >= 3 || j >= 3) {
                 std::cout << "Out of bounds! Please try again.\n";
