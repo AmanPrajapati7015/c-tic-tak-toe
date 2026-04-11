@@ -6,14 +6,19 @@
 
 static const double DECAY_RATE = 0.95;
 
-template <typename T, typename T1>
+// T is cur player who has to play,
+//  T1 will play next
+
+// isMaxi = 1 (adversary is T)
+template <bool isMaxi, typename T, typename T1>
 double MinMax(Board& board, Player<T>* p, int i, Player<T1>* other) {
-    board.m_mark(p->getMarker(), i);
+    board.m_mark(p->getMarker(), i);  // played by T
 
     // base case: evaluated for the player who JUST moved (p)
     if (board.m_HasWon()) {
         board.m_RemoveMark(i);
-        if constexpr (std::is_same_v<HumanPlayer, T>)
+        // if constexpr (std::is_same_v<HumanPlayer, T>)
+        if constexpr (!isMaxi)
             return -5;
         else
             return 5;
@@ -26,12 +31,12 @@ double MinMax(Board& board, Player<T>* p, int i, Player<T1>* other) {
 
     double g_bestScore = 0;
 
-    if constexpr (std::is_same_v<HumanPlayer, T>) {  // next player is AI
+    if constexpr (!isMaxi) {  // next player is AI
         double bestScore = INT_MIN;
 
         for (int j = 0; j < 9; j++) {
             if (board.m_IsValidIndex(j)) {
-                double score = MinMax(board, other, j, p);
+                double score = MinMax<!isMaxi>(board, other, j, p);
                 bestScore = std::max(bestScore, score);
             }
         }
@@ -43,7 +48,7 @@ double MinMax(Board& board, Player<T>* p, int i, Player<T1>* other) {
 
         for (int j = 0; j < 9; j++) {
             if (board.m_IsValidIndex(j)) {
-                double score = MinMax(board, other, j, p);
+                double score = MinMax<!isMaxi>(board, other, j, p);
                 bestScore = std::min(bestScore, score);
             }
         }

@@ -6,7 +6,7 @@
 
 int main(int argc, char const* argv[]) {
     HumanPlayer player1("Aman", 'X');
-    AIPlayer player2("AI", 'O');
+    AIPlayer player2("Divesh", 'O');
     Board board{};
 
     bool isDraw = true;

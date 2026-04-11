@@ -14,7 +14,7 @@ class AIPlayer : public Player<AIPlayer> {
 
         for (int i = 0; i < 9; i++) {
             if (board.m_IsValidIndex(i)) {
-                double score = MinMax(board, this, i, other);
+                double score = MinMax<true>(board, this, i, other);
                 if (score > maxi_score) {
                     maxi_ind = i;
                     maxi_score = score;
