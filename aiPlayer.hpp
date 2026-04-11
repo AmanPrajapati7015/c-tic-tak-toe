@@ -9,12 +9,12 @@ class AIPlayer : public Player<AIPlayer> {
     AIPlayer(const char* name, char marker) : Player(name, marker) {}
     template <typename T1>
     void PlayTurn(Board& board, Player<T1>* other) {
-        int maxi_score = INT_MIN;
+        double maxi_score = INT_MIN;
         int maxi_ind = -1;
 
         for (int i = 0; i < 9; i++) {
             if (board.m_IsValidIndex(i)) {
-                int score = MinMax(board, this, i, other);
+                double score = MinMax(board, this, i, other);
                 if (score > maxi_score) {
                     maxi_ind = i;
                     maxi_score = score;
