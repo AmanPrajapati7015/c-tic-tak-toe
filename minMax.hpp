@@ -29,33 +29,23 @@ double MinMax(Board& board, Player<T>* p, int i, Player<T1>* other) {
         return 0;
     }
 
-    double g_bestScore = 0;
+    double bestScore;
+    if constexpr (!isMaxi)  // next player is AI
+        bestScore = INT_MIN;
+    else
+        bestScore = INT_MAX;
 
-    if constexpr (!isMaxi) {  // next player is AI
-        double bestScore = INT_MIN;
-
-        for (int j = 0; j < 9; j++) {
-            if (board.m_IsValidIndex(j)) {
-                double score = MinMax<!isMaxi>(board, other, j, p);
+    for (int j = 0; j < 9; j++) {
+        if (board.m_IsValidIndex(j)) {
+            double score = MinMax<!isMaxi>(board, other, j, p);
+            if constexpr (!isMaxi)  // next player is AI
                 bestScore = std::max(bestScore, score);
-            }
-        }
-        g_bestScore = bestScore;
-    }
-
-    else {  // next player is HUMAN
-        double bestScore = INT_MAX;
-
-        for (int j = 0; j < 9; j++) {
-            if (board.m_IsValidIndex(j)) {
-                double score = MinMax<!isMaxi>(board, other, j, p);
+            else
                 bestScore = std::min(bestScore, score);
-            }
         }
-        g_bestScore = bestScore;
     }
 
     board.m_RemoveMark(i);
 
-    return (DECAY_RATE)*g_bestScore;
+    return (DECAY_RATE)*bestScore;
 }
